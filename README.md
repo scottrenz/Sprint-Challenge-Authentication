@@ -40,11 +40,22 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 - [ ] What is the purpose of using _sessions_?
 
+Sessions are a simple way to store data for individual users against a unique session ID. This can be used to persist state information between page requests. Session IDs are normally sent to the browser via session cookies and the ID is used to retrieve existing session data.
+
 - [ ] What does bcrypt do to help us store passwords in a secure manner.
+
+With a one-way hash password, a server does not store plain text passwords to authenticate a user. Here, a password has a hashing algorithm applied to it to make it more secure. BCrypt is based on the Blowfish block cipher cryptomatic algorithm and takes the form of an adaptive hash function.
 
 - [ ] What does bcrypt do to slow down attackers?
 
+This slow key changing is beneficial to password hashing methods such as bcrypt since the extra computational demand helps protect against dictionary and brute force attacks by slowing down the attack. ... "`bcrypt` was designed for password hashing hence it is a slow algorithm.
+
 - [ ] What are the three parts of the JSON Web Token?
+
+    Header.
+    Payload.
+    Signature.
+    
 
 ## Minimum Viable Product
 
