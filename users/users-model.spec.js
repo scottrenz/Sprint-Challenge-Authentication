@@ -1,3 +1,4 @@
+const axios = require('axios');
 const Users = require('./users-model.js');
 const db = require('../database/dbConfig.js');
 
@@ -37,9 +38,20 @@ const id = userid.id
     });
   });
 
+  describe('axios get', () => {
+    it('should find users into the db', async () => {
+      const requestOptions = {
+        headers: { accept: 'application/json' },
+      };
+    
+      let jokes = await  axios.get('https://icanhazdadjoke.com/search', requestOptions)
+      expect(jokes.data.results.length).toBe(20);
+    });
+
+  });
+  
   describe('find()', () => {
     it('should find users into the db', async () => {
-      // add a record
       let users = await Users.find();
       
       expect(users).toHaveLength(0);
@@ -49,7 +61,6 @@ const id = userid.id
   
   describe('findBy()', () => {
     it('should find by users into the db', async () => {
-      // add a record
       const userid = await Users.add({ username: 'Gaffer', password: 'pass' });
 // console.log('user id',userid.id)
 const id = userid.id
@@ -62,7 +73,6 @@ const id = userid.id
 
   describe('findById(id)', () => {
     it('should find by id users into the db', async () => {
-      // add a record
       const userid = await Users.add({ username: 'Gaffer', password: 'pass' });
 // console.log('user id',userid.id)
 const id = userid.id
