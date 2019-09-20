@@ -37,6 +37,28 @@ const id = userid.id
     });
   });
 
+  describe('find()', () => {
+    it('should find users into the db', async () => {
+      // add a record
+      let users = await Users.find();
+      
+      expect(users).toHaveLength(0);
+    });
+
+  });
+  describe('findBy()', () => {
+    it('should find users into the db', async () => {
+      // add a record
+      const userid = await Users.add({ username: 'Gaffer', password: 'pass' });
+console.log('user id',userid.id)
+const id = userid.id
+      let users = await Users.findBy({id: id});
+      
+      expect(users).toHaveLength(1);
+    });
+
+  });
+
   describe('remove()', () => {
     it('should delete a user from the db', async () => {
       // delete a record
