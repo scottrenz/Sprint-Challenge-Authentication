@@ -39,7 +39,7 @@ const id = userid.id
   });
 
   describe('axios get', () => {
-    it('should find users into the db', async () => {
+    it('should get jokes from the site', async () => {
       const requestOptions = {
         headers: { accept: 'application/json' },
       };
@@ -51,7 +51,7 @@ const id = userid.id
   });
   
   describe('find()', () => {
-    it('should find users into the db', async () => {
+    it('should find users from the db', async () => {
       let users = await Users.find();
       
       expect(users).toHaveLength(0);
@@ -60,7 +60,7 @@ const id = userid.id
   });
   
   describe('findBy()', () => {
-    it('should find by users into the db', async () => {
+    it('should find by users from the db', async () => {
       const userid = await Users.add({ username: 'Gaffer', password: 'pass' });
 // console.log('user id',userid.id)
 const id = userid.id
@@ -72,7 +72,7 @@ const id = userid.id
   });
 
   describe('findById(id)', () => {
-    it('should find by id users into the db', async () => {
+    it('should find by id users from the db', async () => {
       const userid = await Users.add({ username: 'Gaffer', password: 'pass' });
 // console.log('user id',userid.id)
 const id = userid.id
