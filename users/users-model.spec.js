@@ -1,5 +1,5 @@
-const Users = require('./usersModel.js');
-const db = require('../data/dbConfig.js');
+const Users = require('./users-model.js');
+const db = require('../database/dbConfig.js');
 
 describe('users model', () => {
   beforeEach(async () => {
@@ -10,43 +10,47 @@ describe('users model', () => {
     expect(process.env.DB_ENV).toBe('testing');
   });
 
-  describe('insert()', () => {
-    it('should insert users into the db', async () => {
-      // insert a record
-      await Users.insert({ name: 'Gaffer' });
-      await Users.insert({ name: 'Frodo' });
+  describe('add()', () => {
+    it('should add users into the db', async () => {
+      // add a record
+      await Users.add({ username: 'Gaffer', password: 'pass' });
+      await Users.add({ username: 'Frodo', password: 'pass' });
 
       let users = await db('users');
 
-      // assert the record was inserted
+      // assert the record was added
       expect(users).toHaveLength(2);
     });
 
-    it('should insert users into the db', async () => {
-      // insert a record
-      const [id] = await Users.insert({ name: 'Gaffer' });
+    it('should add users into the db', async () => {
+      // add a record
+      const userid = await Users.add({ username: 'Gaffer', password: 'pass' });
+console.log('user id',userid.id)
+const id = userid.id
 
       let user = await db('users')
         .where({ id })
         .first();
 
-      // assert the record was inserted
-      expect(user.name).toBe('Gaffer');
+      // assert the record was added
+      expect(user.username).toBe('Gaffer');
     });
   });
 
   describe('remove()', () => {
     it('should delete a user from the db', async () => {
       // delete a record
-      // await Users.insert({ name: 'Gaffer' });
-      const [id] = await Users.insert({ name: 'Gaffer' });
+      // await Users.add({ username: 'Gaffer' });
+      const userid = await Users.add({ username: 'Gaffer', password: 'pass' });
+      const id = userid.id
       await Users.remove(id);
-      const [id2] = await Users.insert({ name: 'Frodo' });
+      const userid2 = await Users.add({ username: 'Frodo', password: 'pass' });
+      const id2 = userid2.id
       await Users.remove(id2);
 
       let users = await db('users');
 
-      // assert the record was inserted
+      // assert the record was added
       expect(users).toHaveLength(0);
     });
 

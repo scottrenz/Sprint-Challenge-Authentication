@@ -12,6 +12,30 @@ router.get('/alive', (req, res) => {
 });
 
 
+router.get('/users', (req, res) => {
+  console.log('req',req)
+  Users.find()
+    .then(user => {
+console.log('user',user)
+      res.status(201).json(user);
+    })
+    .catch(error => {
+      res.status(500).json(error+'');
+    });
+});
+
+router.delete('/:id', (req, res) => {
+  let id = req.params.id;
+ console.log('id',id)
+  Users.remove(id)
+    .then(removed => {
+        res.status(201).json(removed); 
+    })
+    .catch(error => {
+      res.status(500).json(error+'');
+    });
+});
+
 router.post('/register', (req, res) => {
   console.log('req',req)
   let user = req.body;

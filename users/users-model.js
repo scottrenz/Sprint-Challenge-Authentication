@@ -5,6 +5,7 @@ module.exports = {
   find,
   findBy,
   findById,
+  remove
 };
 
 function find() {
@@ -26,3 +27,9 @@ function findById(id) {
     .where({ id })
     .first();
 }
+
+
+function remove(id) {
+ return  db.raw('delete from users where id='+id)
+  }
+  
