@@ -25,7 +25,7 @@ describe('users model', () => {
     it('should add users into the db', async () => {
       // add a record
       const userid = await Users.add({ username: 'Gaffer', password: 'pass' });
-console.log('user id',userid.id)
+// console.log('user id',userid.id)
 const id = userid.id
 
       let user = await db('users')
@@ -46,15 +46,29 @@ const id = userid.id
     });
 
   });
+  
   describe('findBy()', () => {
-    it('should find users into the db', async () => {
+    it('should find by users into the db', async () => {
       // add a record
       const userid = await Users.add({ username: 'Gaffer', password: 'pass' });
-console.log('user id',userid.id)
+// console.log('user id',userid.id)
 const id = userid.id
       let users = await Users.findBy({id: id});
       
       expect(users).toHaveLength(1);
+    });
+
+  });
+
+  describe('findById(id)', () => {
+    it('should find by id users into the db', async () => {
+      // add a record
+      const userid = await Users.add({ username: 'Gaffer', password: 'pass' });
+// console.log('user id',userid.id)
+const id = userid.id
+      let users = await Users.findById(id);
+   //   console.log('findbyid users',users)
+      expect(users.id).toBe(1);
     });
 
   });
